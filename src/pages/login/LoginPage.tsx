@@ -15,7 +15,7 @@ function LoginPage() {
       <div style={{fontSize:'70px', color:'black',alignItems:'centre',padding:'20px', backgroundColor:'white', borderRadius: '16px', fontFamily:'Times New Roman'}}>
         Добро пожаловать в RandomCoffee!
       </div>
-      <div><img src='./logo3.png' /></div>
+      <div><img width='500px' height='500px' src='./logo3.png' /></div>
       <div><LoginForm /></div>
     </div>
   );

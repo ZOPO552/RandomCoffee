@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import { supabase } from '../../shared/supabaseClient';
 import TopicsList from './components/TopicsList';
 import Places from './components/Places';
+import Icon, { CarOutlined, BookOutlined } from '@ant-design/icons';
+
 
 function AdminPage() {
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ function AdminPage() {
   }
 
   return (
-    <Layout style={{ minWidth: '100%', minHeight: '100%' }}>
+    <Layout style={{ minWidth: '100%', minHeight: '100vh'}}>
       <Sider style={{ background: colorBgContainer, backgroundColor:'#040f47', justifyContent: 'center', alignItems: 'center',}}>
         <Menu
           theme="dark"
@@ -51,24 +53,32 @@ function AdminPage() {
           style={{backgroundColor: '#040f47', color:'white'}}
           items={[
             {
+              icon: <BookOutlined/>,
+              style: {fontSize:'15px', marginTop:'15px', fontFamily:'cursive'},
               key: '1',
-              label: 'Topic',
+              label: 'Интересы',
               onClick: () => setSelectedMenuItemKey('1'),
             },
             {
+              icon: <CarOutlined/>,
+              style: {fontSize:'15px', marginTop:'15px', fontFamily:'cursive'},
               key: '2',
-              label: 'Place',
+              label: 'Место',
               onClick: () => setSelectedMenuItemKey('2'),
+            },
+            {
+              style: {fontSize:'15px', marginTop:'15px', fontFamily:'cursive'},
+              key: '3',
+              label: 'Выйти из аккаунта',
+              onClick: () => logout(),
             },
             
           ]}
           
         />
-            <Button style={{backgroundColor:'#F0F8FF', width:'200px',}} onClick={() => logout()}>
-              Выйти
-            </Button>
       </Sider>
       <Layout>
+      <center><span style={{fontSize:'50px', fontFamily:'cursive', marginRight:'15px'}}>Random Coffee</span><img src='logo3.png' style={{width:'50px'}}/></center>
         <Header style={{ padding: 0, background: colorBgContainer, backgroundColor:'white'
         }}>
           <div
@@ -81,12 +91,11 @@ function AdminPage() {
               columnGap: '15px',
             }}
           >
-            <div style={{fontSize:'50px', fontFamily:'Times New Roman'}}>Random Coffee </div><img src='./Coffelover.jpg' style={{width:'50px'}}/>
+
           </div>
         </Header>
         <Content
           style={{
-            margin: '24px 16px',
             padding: 24,
             width: '100%',
             background: colorBgContainer,
