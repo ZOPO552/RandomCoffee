@@ -29,7 +29,7 @@ jobs:
           node-version: lts/*
 
       - name: Install step
-        run: "deno install"
+        run: "npm install"
 
       - name: Build step
         run: "npm run build"
