@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Layout, Menu, theme } from 'antd';
 const { Header, Sider, Content } = Layout;
 import { useNavigate } from 'react-router-dom';

@@ -3,7 +3,7 @@ import { Button, Space, Input, Modal} from 'antd'
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 
 const TopicList: React.FC = () => {
-  const [topics, setTopics] = useState(["234243"])
+  const [topics] = useState(["234243"])
   const [visibleAdd, setVisibleAdd] = useState(false)
   const [inputValueAdd, setInputValueAdd] = useState('')
   const [inputValueDelete, setInputValueDelete] = useState('')
