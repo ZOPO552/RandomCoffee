@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Button, Layout, Menu, theme } from 'antd';
+import { Layout, Menu, theme } from 'antd';
 const { Header, Sider, Content } = Layout;
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { supabase } from '../../shared/supabaseClient';
 import TopicsList from './components/TopicsList';
 import Places from './components/Places';
-import Icon, { CarOutlined, BookOutlined } from '@ant-design/icons';
+import { CarOutlined, BookOutlined } from '@ant-design/icons';
 
 
 function AdminPage() {
