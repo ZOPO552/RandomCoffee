@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'; 
 import { Button, Space, Input, Modal, Card } from 'antd'; 
-import { PlusOutlined, MinusOutlined } from '@ant-design/icons'; 
+import { PlusOutlined, MinusOutlined, RetweetOutlined } from '@ant-design/icons'; 
 import { supabase } from '../../../shared/supabaseClient'; 
  
 function TopicList() { 
@@ -9,7 +9,9 @@ function TopicList() {
   const [inputValueAdd, setInputValueAdd] = useState(''); 
  
   const [visibleDelete, setVisibleDelete] = useState(false); 
-  const [deleteId, setDeleteId] = useState<number | null>(null); 
+  const [deleteId, setDeleteId] = useState<number | null>(null);
+  
+  const [visibleEdit, setVisibleEdit] = useState(false); 
  
   useEffect(() => { 
     const fetchData = async () => { 
@@ -25,7 +27,7 @@ function TopicList() {
  
   const showModalAdd = () => { setVisibleAdd(true); }; 
   const handleCancelAdd = () => { setVisibleAdd(false); }; 
-   
+  
   const addValue = async () => { 
     if (inputValueAdd) { 
       const { data: newTopic, error } = await supabase 
@@ -67,27 +69,38 @@ function TopicList() {
     } 
     setVisibleDelete(false); 
   }; 
+
+  const editValue = () => { 
+    deleteValue();
+    addValue();
+    setVisibleEdit(false);
+  }
+  const handleCancelEdit = () => {setVisibleEdit(false)}
+  const showModalEdit = (id: number) => {setDeleteId(id); setVisibleEdit(true)}
  
   return ( 
     <div style={{fontSize: 20}}> 
+      <h1 style={{marginLeft: '20px', fontFamily:'cursive', alignSelf: 'center'}}>Добавь своё любимое хобби!</h1>
       <Space size={[12, 20]} wrap> 
-        
         {data.map(topic => ( 
           <Card 
             key={topic.id} 
             title={topic.title} 
-            extra={<Button onClick={() => showModalDelete(topic.id)} icon={<MinusOutlined />} />} 
+            extra={<><Button style={{height: '20px', width: '20px'}}onClick={() => showModalEdit(topic.id)} icon={<RetweetOutlined />} /><Button danger style={{marginLeft: '5px', height: '20px', width: '20px'}}onClick={() => showModalDelete(topic.id)} icon={<MinusOutlined />} /></>} 
             style={{ width: 250, marginBottom: 16, marginLeft: 16 }} 
           > 
           </Card>
-        ))} 
+        ))}
+        <Button onClick={showModalAdd} style={{ width: 240, height: 90, marginLeft: '20px', fontSize: '25px' }} icon={<PlusOutlined />}> 
+          Добавить
+        </Button>
       </Space>
-      <Button onClick={showModalAdd} style={{ minWidth: '12vw', minHeight: '8vh', marginLeft: '15px', marginTop: '15px', fontSize: '17px' }} icon={<PlusOutlined />}> 
-        Добавить 
-      </Button> 
       <Modal title="Введите название нового интереса" visible={visibleAdd} onOk={addValue} onCancel={handleCancelAdd}> 
         <Input value={inputValueAdd} onChange={(e) => setInputValueAdd(e.target.value)} /> 
-      </Modal> 
+      </Modal>
+      <Modal title="Введите новое название интереса" visible={visibleEdit} onOk={editValue} onCancel={handleCancelEdit}> 
+        <Input value={inputValueAdd} onChange={(e) => setInputValueAdd(e.target.value)} /> 
+      </Modal>  
       <Modal title="Вы уверены, что хотите удалить?" visible={visibleDelete} onOk={deleteValue} onCancel={handleCancelDelete}> 
       </Modal> 
     </div> 

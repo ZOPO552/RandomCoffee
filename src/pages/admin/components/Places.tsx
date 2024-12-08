@@ -1,6 +1,8 @@
+
 import { Card, Button, Input, Col, Row, message } from 'antd'; 
 import { useState, useEffect } from 'react'; 
 import { supabase } from '../../../shared/supabaseClient'; 
+import PlacesVidg from './PlacesVidg'
  
 const AddPlaceCard: React.FC<{ onAdd: (title: string, location: string) => void }> = ({ onAdd }) => { 
   const [inputValueAdd, setInputValueAdd] = useState(''); 
@@ -82,23 +84,26 @@ const TopicsList: React.FC = () => {
  
   return ( 
     <div> 
-      <Row gutter={16}> 
-        <Col span={8}> 
+      <PlacesVidg wkbString={"0101000020E61000007B88467710834B4023D923D40C535240"}/> 
+      <Row gutter={16} > 
+        <Col span={8} style={{ marginTop: '10%',  }}> 
           <AddPlaceCard onAdd={handleAddPlace} /> 
         </Col> 
-      </Row> 
-      <div style={{ marginTop: '20px' }}> 
-        <h3>Список мест:</h3> 
+      </Row>  
+      
+      <div style={{ marginTop: '20px',  }}> 
+        <h1>Список мест:</h1> 
         {places.map((place) => ( 
-          <Card key={place.id} style={{ margin: '10px 0' }}> 
-            <h4>{place.title}</h4> 
-            <p>{place.location}</p> 
+          <Card key={place.id} style={{ margin: '10px 0',  }}> 
+            <h2 style={{marginLeft: '35%'}}>{place.title}</h2> 
+            <p style={{marginLeft: '35%'}}>{place.location}</p> 
             <Button 
               danger 
+              style={{marginLeft: '45%'}}
               onClick={() => handleDeletePlace(place.id)} 
             > 
               Удалить 
-            </Button> 
+            </Button>
           </Card> 
         ))} 
       </div> 
