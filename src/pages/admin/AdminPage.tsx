@@ -63,7 +63,7 @@ function AdminPage() {
               icon: <CarOutlined/>,
               style: {fontSize:'15px', marginTop:'15px', fontFamily:'cursive'},
               key: '2',
-              label: 'Место',
+              label: 'Места',
               onClick: () => setSelectedMenuItemKey('2'),
             },
             {
